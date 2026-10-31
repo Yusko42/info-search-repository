@@ -1,0 +1,56 @@
+# Python / Byte-compiled
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables & secrets
+.env
+.venv
+local_settings.py
+
+# Databases
+*.sqlite3
+*.db
+
+# Flask
+instance/
+.webassets-cache
+
+# Django
+*.log
+media/
+staticfiles/
+# db.sqlite3 (уже учтено через *.sqlite3 выше)
+
+# Distribution / Packaging
+build/
+dist/
+*.egg-info/
+man/
+manifest.json
+
+# Unit tests / Coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+
+# IDE / Editor settings
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
