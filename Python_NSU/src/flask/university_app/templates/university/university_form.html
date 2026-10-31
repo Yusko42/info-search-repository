@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Университет</h1>
+
+<form method="post">
+    {{ form.hidden_tag() }}
+
+    <p>
+        {{ form.full_name.label }}
+        {{ form.full_name() }}
+        {% for error in form.full_name.errors %}
+            <span>{{ error }}</span>
+        {% endfor %}
+    </p>
+
+    <p>
+        {{ form.short_name.label }}
+        {{ form.short_name() }}
+        {% for error in form.short_name.errors %}
+            <span>{{ error }}</span>
+        {% endfor %}
+    </p>
+
+    <p>
+        {{ form.founded_date.label }}
+        {{ form.founded_date() }}
+        {% for error in form.founded_date.errors %}
+            <span>{{ error }}</span>
+        {% endfor %}
+    </p>
+
+    {{ form.submit() }}
+</form>
+
+<a href="{{ url_for('university_list') }}">
+    Назад
+</a>
+
+{% endblock %}

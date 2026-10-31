@@ -1,0 +1,10 @@
+from flask.university_app import Flask 
+
+app = Flask(__name__) 
+
+@app.route('/') 
+def index(): 
+    return "Привет, мир!" 
+
+if __name__ == "__main__": 
+    app.run()

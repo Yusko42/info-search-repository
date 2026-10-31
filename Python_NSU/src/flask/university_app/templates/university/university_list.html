@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Университеты{% endblock %}
+
+{% block content %}
+
+<h1>Список университетов</h1>
+
+{% if current_user.is_authenticated %}
+    <a href="{{ url_for('university_create') }}">
+        Добавить университет
+    </a>
+{% else %}
+    <p>
+        Для добавления университетов необходимо
+        <a href="{{ url_for('login') }}">войти</a>.
+    </p>
+{% endif %}
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Полное название</th>
+        <th>Сокращение</th>
+        <th>Дата создания</th>
+        <th>Действия</th>
+    </tr>
+    {% for uni in universities %}
+    <tr>
+        <td>{{ uni.full_name }}</td>
+        <td>{{ uni.short_name }}</td>
+        <td>{{ uni.founded_date }}</td>
+        <td>
+             {% if current_user.is_authenticated %}
+                <a href="{{ url_for(
+                    'university_update',
+                    id=uni.id
+                ) }}">
+                    Редактировать
+                </a>
+                |
+            {% endif %}
+
+            <a href="{{ url_for(
+                'university_delete',
+                id=uni.id
+            ) }}">
+                Удалить
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4">Университетов пока нет</td>
+    </tr>
+    {% endfor %}
+<table border="1" cellpadding="8">
+
+{% endblock %}

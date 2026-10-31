@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Университеты{% endblock %}
+
+{% block content %}
+
+<h1>Список университетов</h1>
+
+<a href="{% url 'university_create' %}">Добавить университет</a>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Полное название</th>
+        <th>Сокращение</th>
+        <th>Дата создания</th>
+        <th>Действия</th>
+    </tr>
+    {% for uni in universities %}
+    <tr>
+        <td>{{ uni.full_name }}</td>
+        <td>{{ uni.short_name }}</td>
+        <td>{{ uni.founded_date }}</td>
+        <td>
+            <a href="{% url 'university_update' uni.pk %}">Редактировать</a>
+            |
+            <a href="{% url 'university_delete' uni.pk %}">Удалить</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">Университетов пока нет</td>
+    </tr>
+    {% endfor %}
+<table border="1" cellpadding="8">
+
+{% endblock %}

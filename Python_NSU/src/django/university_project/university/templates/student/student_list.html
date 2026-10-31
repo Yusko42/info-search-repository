@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Студенты{% endblock %}
+
+{% block content %}
+
+<h1>Список студентов</h1>
+
+<a href="{% url 'student_create' %}">
+    Добавить студента
+</a>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ФИО</th>
+        <th>Дата рождения</th>
+        <th>Университет</th>
+        <th>Год поступления</th>
+        <th>Действия</th>
+    </tr>
+
+    {% for student in students %}
+    <tr>
+        <td>{{ student.full_name }}</td>
+        <td>{{ student.birth_date }}</td>
+        <td>{{ student.university.short_name }}</td>
+        <td>{{ student.enrollment_year }}</td>
+        <td>
+            <a href="{% url 'student_update' student.pk %}">Редактировать</a>
+            |
+            <a href="{% url 'student_delete' student.pk %}">Удалить</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">Студентов пока нет</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

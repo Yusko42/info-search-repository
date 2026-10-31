@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Студенты{% endblock %}
+
+{% block content %}
+
+<h1>Список студентов</h1>
+
+{% if current_user.is_authenticated %}
+    <a href="{{ url_for('student_create') }}">
+        Добавить студента
+    </a>
+{% else %}
+    <p>
+        Для добавления студентов необходимо
+        <a href="{{ url_for('login') }}">войти</a>.
+    </p>
+{% endif %}
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>ФИО</th>
+        <th>Дата рождения</th>
+        <th>Университет</th>
+        <th>Год поступления</th>
+        <th>Действия</th>
+    </tr>
+
+    {% for student in students %}
+    <tr>
+        <td>{{ student.full_name }}</td>
+        <td>{{ student.birth_date }}</td>
+        <td>{{ student.university.short_name }}</td>
+        <td>{{ student.enrollment_year }}</td>
+        <td>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for(
+                    'student_update',
+                    id=student.id
+                ) }}">
+                    Редактировать
+                </a>
+                |
+            {% endif %}
+
+            <a href="{{ url_for(
+                'student_delete',
+                id=student.id
+            ) }}">
+                Удалить
+            </a>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="5">Студентов пока нет</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

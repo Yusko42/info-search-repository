@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Студент</h1>
+
+<form method="post">
+    {{ form.hidden_tag() }}
+
+    <p>{{ form.full_name.label }} {{ form.full_name() }}</p>
+    <p>{{ form.birth_date.label }} {{ form.birth_date() }}</p>
+    <p>{{ form.university_id.label }} {{ form.university_id() }}</p>
+    <p>{{ form.enrollment_year.label }} {{ form.enrollment_year() }}</p>
+
+    {{ form.submit() }}
+</form>
+
+<a href="{{ url_for('student_list') }}">
+    Назад
+</a>
+
+{% endblock %}

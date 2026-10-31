@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Университеты{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('university_list') }}">
+            Университеты
+        </a>
+        |
+        <a href="{{ url_for('student_list') }}">
+            Студенты
+        </a>
+        |
+        {% if current_user.is_authenticated %}
+            <span>Пользователь: {{ current_user.username }}</span>
+            <form method="post"
+                  action="{{ url_for('logout') }}"
+                  style="display:inline">
+                <input type="hidden" name="csrf_token"
+                value="{{ csrf_token() }}">
+                <button type="submit">Выйти</button>
+            </form>
+        {% else %}
+            <a href="{{ url_for('login') }}">Войти</a>
+            |
+            <a href="{{ url_for('register') }}">Регистрация</a>
+        {% endif %}
+    </nav>
+
+    <hr>
+
+    {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

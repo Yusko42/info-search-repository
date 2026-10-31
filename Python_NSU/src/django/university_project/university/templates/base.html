@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Университеты{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'university_list' %}">
+            Университеты
+        </a>
+        |
+        <a href="{% url 'student_list' %}">
+            Студенты
+        </a>
+        |
+        <a href="/admin/">
+            Администрирование
+        </a>
+    </nav>
+
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
